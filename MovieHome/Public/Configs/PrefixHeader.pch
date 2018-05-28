@@ -1,0 +1,152 @@
+//
+//  PrefixHeader.pch
+//  ManureHeapFM
+//
+//  Created by 邹壮壮 on 2018/4/6.
+//  Copyright © 2018年 邹壮壮. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//是否等于版本 v
+#define SYSTEM_VERSION_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+//大于
+#define SYSTEM_VERSION_GREATER_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+//大于或等于
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+//小于
+#define SYSTEM_VERSION_LESS_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+//小于或等于
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+//通用设备判断
+#define IS_OS_7_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+
+/** 是否为iOS6 */
+#define iOS6 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 6.0) ? YES : NO)
+
+/** 是否为iOS7 */
+#define iOS7 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) ? YES : NO)
+
+/** 是否为iOS8 */
+#define iOS8 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) ? YES : NO)
+
+/** 是否为iOS9 */
+#define iOS9 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) ? YES : NO)
+/**是否为iOS10*/
+#define iOS10 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0) ? YES : NO)
+#define iOS11 (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) ? YES : NO)
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+//设备判断
+#define IS_OS_8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_4_or_5 (IS_IPHONE && ([[UIScreen mainScreen] bounds].size.height <= 568.0))
+
+#define IS_IPHONE_5 (IS_IPHONE && ([[UIScreen mainScreen] bounds].size.height == 568.0) && ((IS_OS_8_OR_LATER && [UIScreen mainScreen].nativeScale == [UIScreen mainScreen].scale) || !IS_OS_8_OR_LATER))
+
+#define IS_STANDARD_IPHONE_6 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0  && IS_OS_8_OR_LATER && [UIScreen mainScreen].nativeScale == [UIScreen mainScreen].scale)
+#define IS_ZOOMED_IPHONE_6 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0 && IS_OS_8_OR_LATER && [UIScreen mainScreen].nativeScale > [UIScreen mainScreen].scale)
+#define IS_STANDARD_IPHONE_6_PLUS (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
+#define IS_ZOOMED_IPHONE_6_PLUS (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0 && IS_OS_8_OR_LATER && [UIScreen mainScreen].nativeScale < [UIScreen mainScreen].scale)
+//log
+#ifdef DEBUG
+#define LRLog(...) NSLog(@"%s 第%d行 \n %@\n\n",__func__,__LINE__,[NSString stringWithFormat:__VA_ARGS__])
+#else
+#define LRLog(...)
+#endif
+
+
+
+
+//宽高
+#define KscreenWidth [[UIScreen mainScreen] bounds].size.width //屏幕宽
+#define KscreenHeight [[UIScreen mainScreen] bounds].size.height //屏幕高
+#define Get375Width(value) value*(KscreenWidth/375)
+
+#pragma mark-  ---- Nav and TabBar ----
+
+#define kUINavigationBarFrameHeight         44.0f
+#define kStatusBarHeight                    [UIApplication sharedApplication].statusBarFrame.size.height
+#define kUINavigationFrameHeight            (kStatusBarHeight+kUINavigationBarFrameHeight)
+#define kTabBarFrameHeight                  (kStatusBarHeight>20?83:49) // 适配iPhone x 底栏高度
+#define kBottomAreaHeight                   (kStatusBarHeight>20?34.f:0.f) // 适配iPhone x 底栏高度
+
+//颜色
+// rgb颜色转换（16进制->10进制）
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+//带有RGBA的颜色设置
+#define RGBA(R,G,B,A)  [UIColor colorWithRed:R/255.0f green:G/255.0f blue:B/255.0f alpha:A]
+#define UIColorWithHex(value) [UIColor colorWithHexString:value]
+
+//----------------------设置随即颜色----------------------------
+#define LRRandomColor [UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0]
+
+
+//字体
+#pragma mark - 字体定义
+
+#define PingFangFont(font)   ([[UIFont familyNames] containsObject:@"PingFang SC"] ? [UIFont fontWithName:@"PingFangSC-Regular" size:Get375Width(font)] : [UIFont systemFontOfSize:Get375Width(font)])
+
+#define PingFangBoldFont(font)  ([[UIFont familyNames] containsObject:@"PingFang SC"] ? [UIFont fontWithName:@"PingFangSC-Semibold" size:Get375Width(font)] : [UIFont fontWithName:@"Helvetica-Bold" size:Get375Width(font)])
+
+#define PingFangMediumFont(font)  ([[UIFont familyNames] containsObject:@"PingFang SC"] ? [UIFont fontWithName:@"PingFangSC-Medium" size:Get375Width(font)] : [UIFont fontWithName:@"Helvetica-Medium" size:Get375Width(font)])
+
+#define PingFangBold414Font(font) ([[UIFont familyNames] containsObject:@"PingFang SC"] ? [UIFont fontWithName:@"PingFangSC-Semibold" size:Get414Font(font)] : [UIFont fontWithName:@"Helvetica-Bold" size:Get414Font(font)])
+//----------------------强引用、弱引用----------------------------
+#define kWeakSelf(type)  __weak typeof(type) weak##type = type;
+#define kStrongSelf(type)  __strong typeof(type) type = weak##type;
+
+
+//NSUserDefaults
+#define UserDefaultSetObjectForKey(__VALUE__,__KEY__) \
+{\
+[[NSUserDefaults standardUserDefaults] setObject:__VALUE__ forKey:__KEY__];\
+[[NSUserDefaults standardUserDefaults] synchronize];\
+}
+
+
+
+/**
+ *  get the saved objects       获得存储的对象
+ */
+#define UserDefaultObjectForKey(__KEY__)  [[NSUserDefaults standardUserDefaults] objectForKey:__KEY__]
+
+/**
+ *  delete objects      删除对象
+ */
+#define UserDefaultRemoveObjectForKey(__KEY__) \
+{\
+[[NSUserDefaults standardUserDefaults] removeObjectForKey:__KEY__];\
+[[NSUserDefaults standardUserDefaults] synchronize];\
+}
+//是否为空
+//是否为空或是[NSNull null]
+#define NotNilAndNull(_ref) (((_ref) != nil) && (![(_ref) isEqual:[NSNull null]]))
+#define IsNilOrNull(_ref) (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]))
+
+//字符串是否为空
+#define IsStrEmpty(_ref) (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref)isEqualToString:@""]))
+//数组是否为空
+#define IsArrEmpty(_ref) (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref) count] == 0))
+
+
+#define force_inline __inline__ __attribute__((always_inline))
+//版本
+#define kVersion [[NSBundle mainBundle].infoDictionary objectForKey:@"CFBundleShortVersionString"]
+///获取URL
+#define getDomainForKey(key) [[MHUrlDomainManager sharedInstance]getDomainForKey:key]
+
+//log
+#ifdef DEBUG
+#define kBaseUrl @"http://mobile.ximalaya.com"
+#define kCategoryFooterBase @"http://adse.ximalaya.com"
+#else
+#define kBaseUrl @"http://mobile.ximalaya.com"
+#define kCategoryFooterBase @"http://adse.ximalaya.com"
+#endif
+#import "AppPublicHeader.h"
+
+
+
+
+#endif /* PrefixHeader_pch */

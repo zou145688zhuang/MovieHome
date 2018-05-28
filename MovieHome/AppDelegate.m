@@ -7,7 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
+#import "MHMineViewController.h"
+#import "MHMainViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,10 +18,32 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self FinishLaunchingWithOptions:launchOptions];
+    [self thirdPartyConfigurationApplication:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
+- (void)FinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    /*初始化视图*/
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    self.window = [[UIWindow alloc] initWithFrame:frame];
+    self.window.backgroundColor = [UIColor blackColor];
+    self.window.rootViewController = self.slideVC;
+    [self.window makeKeyAndVisible];
+}
+//第三方配置
+- (void)thirdPartyConfigurationApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    
+}
 
-
+- (MHSlideViewController *)slideVC{
+    if (!_slideVC) {
+      MHMineViewController *mineVC = [[MHMineViewController alloc]init];
+        MHMainViewController *mainVC = [[MHMainViewController alloc]init];
+        _slideVC = [[MHSlideViewController alloc]initWithLeftView:mineVC andMainView:mainVC];
+        [_slideVC setPanEnabled:YES];
+    }
+    return _slideVC;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

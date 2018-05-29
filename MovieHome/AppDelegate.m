@@ -40,7 +40,7 @@
       MHMineViewController *mineVC = [[MHMineViewController alloc]init];
         MHMainViewController *mainVC = [[MHMainViewController alloc]init];
         _slideVC = [[MHSlideViewController alloc]initWithLeftView:mineVC andMainView:mainVC];
-        [_slideVC setPanEnabled:YES];
+        [_slideVC setPanEnabled:NO];
     }
     return _slideVC;
 }

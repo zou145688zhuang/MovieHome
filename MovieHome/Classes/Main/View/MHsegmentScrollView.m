@@ -53,8 +53,8 @@
             btn.frame = CGRectMake(marign, 0, width, CGRectGetHeight(self.mainScrollView.frame)-Get375Width(1));
             _selectedBtn = btn;
             _selectedBtn.selected = YES;
-            if (self.didClickBtnBlock) {
-                self.didClickBtnBlock(title, 0, YES);
+            if (self.delegate &&[self.delegate respondsToSelector:@selector(didClickBtnTitlt:index:first:)]) {
+                [self.delegate didClickBtnTitlt:title index:i first:YES];
             }
             self.currentSelectedItemImageView.frame = CGRectMake(marign, self.mainScrollView.frame.size.height - Get375Width(1), btn.frame.size.width, Get375Width(1));
         }else{
@@ -75,21 +75,43 @@
      CGFloat total = CGRectGetMaxX(markBtn.frame)+marign;
     self.mainScrollView.contentSize = CGSizeMake(total, 0);
 }
-- (void)scrollDidIndex:(int)index{
+- (void)scrollDidIndex:(NSInteger)index{
     UIButton *btn = [_buttons safeObjectAtIndex:index];
-    [self changeSelectedItem:btn];
+    [self changBtnStatus:btn];
 }
 - (void)changeSelectedItem:(UIButton *)btn{
+    [self changBtnStatus:btn];
+    if (self.delegate &&[self.delegate respondsToSelector:@selector(didClickBtnTitlt:index:first:)]) {
+        [self.delegate didClickBtnTitlt:btn.titleLabel.text index:btn.tag first:NO];
+    }
+}
+- (void)changBtnStatus:(UIButton *)btn{
+    if (IsNilOrNull(btn)) {
+        return;
+    }
+    NSInteger index = btn.tag+1;
+    UIButton *nextBtn;
+    CGFloat offset = -1;
+    if (CGRectGetMaxX(btn.frame)>kScreenWidth) {
+        offset = CGRectGetMaxX(btn.frame) - kScreenWidth;
+        if (index < _buttons.count) {
+            nextBtn = [_buttons safeObjectAtIndex:index];
+            offset = offset + CGRectGetWidth(nextBtn.frame)+padding;
+        }
+    }
+    
+    if (offset>0) {
+        [self.mainScrollView setContentOffset:CGPointMake(offset, 0) animated:YES];
+    }else{
+       [self.mainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    }
+    
     [UIView animateWithDuration:0.3 animations:^{
-      self.currentSelectedItemImageView.frame = CGRectMake(CGRectGetMinX(btn.frame), self.mainScrollView.frame.size.height-Get375Width(1), btn.frame.size.width, Get375Width(1));
+        self.currentSelectedItemImageView.frame = CGRectMake(CGRectGetMinX(btn.frame), self.mainScrollView.frame.size.height-Get375Width(1), btn.frame.size.width, Get375Width(1));
     } completion:nil];
     _selectedBtn.selected = NO;
     btn.selected = !btn.selected;
-    
     _selectedBtn = btn;
-    if (self.didClickBtnBlock) {
-        self.didClickBtnBlock(btn.titleLabel.text, btn.tag, NO);
-    }
 }
 - (UIScrollView *)mainScrollView{
     if (!_mainScrollView) {

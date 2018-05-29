@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MHsegmentScrollViewDelegate<NSObject>
+- (void)didClickBtnTitlt:(NSString *)title index:(NSInteger)ondex first:(BOOL)first;
+@end
 @interface MHsegmentScrollView : UIView
 @property (nonatomic, strong) NSArray *tagArray;
-@property (nonatomic, copy) void(^didClickBtnBlock)(NSString *title,NSInteger index,BOOL First);
-- (void)scrollDidIndex:(int)index;
+@property (nonatomic, weak) id<MHsegmentScrollViewDelegate>delegate;
+- (void)scrollDidIndex:(NSInteger)index;
 @end

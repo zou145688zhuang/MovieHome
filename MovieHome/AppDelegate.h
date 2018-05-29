@@ -13,5 +13,9 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic, strong)MHSlideViewController *slideVC;
 
+/**
+ 切换左侧边栏
+ */
+- (void)toggleLeftVC;
 @end
 

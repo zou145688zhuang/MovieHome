@@ -18,6 +18,7 @@
 #import "NSMutableDictionary+Safe.h"
 #import "NSArray+Safe.h"
 #import "UIView+Frame.h"
+#import "NSString+Extension.h"
 #import "AppFrameHeader.h"
 
 #endif /* AppPublicHeader_h */

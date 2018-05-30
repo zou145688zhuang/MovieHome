@@ -38,6 +38,8 @@
 		32967B0620BBE9B800FD6D77 /* MHMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B0520BBE9B800FD6D77 /* MHMainViewController.m */; };
 		32967B0B20BBEFDB00FD6D77 /* MHsegmentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B0A20BBEFDB00FD6D77 /* MHsegmentScrollView.m */; };
 		32967B0E20BC18E000FD6D77 /* MHContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B0D20BC18E000FD6D77 /* MHContentViewController.m */; };
+		32967B1220BE31A600FD6D77 /* NSString+DecimalsCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B1120BE31A600FD6D77 /* NSString+DecimalsCalculation.m */; };
+		32967B1520BE33BB00FD6D77 /* MHMainTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B1420BE33BB00FD6D77 /* MHMainTopToolView.m */; };
 		A0AB3F67FD7C86BD28C9A411 /* libPods-MovieHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD492CC3DF4026EFFD67A33 /* libPods-MovieHome.a */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +129,10 @@
 		32967B0C20BC18E000FD6D77 /* MHContentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHContentViewController.h; sourceTree = "<group>"; };
 		32967B0D20BC18E000FD6D77 /* MHContentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHContentViewController.m; sourceTree = "<group>"; };
 		32967B0F20BC1BC000FD6D77 /* AppFrameHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppFrameHeader.h; sourceTree = "<group>"; };
+		32967B1020BE31A600FD6D77 /* NSString+DecimalsCalculation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+DecimalsCalculation.h"; sourceTree = "<group>"; };
+		32967B1120BE31A600FD6D77 /* NSString+DecimalsCalculation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+DecimalsCalculation.m"; sourceTree = "<group>"; };
+		32967B1320BE33BB00FD6D77 /* MHMainTopToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHMainTopToolView.h; sourceTree = "<group>"; };
+		32967B1420BE33BB00FD6D77 /* MHMainTopToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHMainTopToolView.m; sourceTree = "<group>"; };
 		4A8029350E09CBEFD31AC461 /* Pods-MovieHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHome/Pods-MovieHome.release.xcconfig"; sourceTree = "<group>"; };
 		4DD492CC3DF4026EFFD67A33 /* libPods-MovieHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -361,6 +367,8 @@
 				32967AD220BBD30800FD6D77 /* UIViewController+BackButtonHandler.m */,
 				32967AD320BBD30800FD6D77 /* UIViewController+Utils.h */,
 				32967AD420BBD30800FD6D77 /* UIViewController+Utils.m */,
+				32967B1020BE31A600FD6D77 /* NSString+DecimalsCalculation.h */,
+				32967B1120BE31A600FD6D77 /* NSString+DecimalsCalculation.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -453,6 +461,8 @@
 			children = (
 				32967B0920BBEFDB00FD6D77 /* MHsegmentScrollView.h */,
 				32967B0A20BBEFDB00FD6D77 /* MHsegmentScrollView.m */,
+				32967B1320BE33BB00FD6D77 /* MHMainTopToolView.h */,
+				32967B1420BE33BB00FD6D77 /* MHMainTopToolView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -663,9 +673,11 @@
 				32967ADC20BBD30800FD6D77 /* NSMutableDictionary+Safe.m in Sources */,
 				32967AE220BBD30800FD6D77 /* UIView+Frame.m in Sources */,
 				32967ADF20BBD30800FD6D77 /* NSString+Extension.m in Sources */,
+				32967B1520BE33BB00FD6D77 /* MHMainTopToolView.m in Sources */,
 				32967AF720BBDE8B00FD6D77 /* MHNavigationViewController.m in Sources */,
 				32967A4E20BB9F0800FD6D77 /* main.m in Sources */,
 				32967AE320BBD30800FD6D77 /* UIView+Utils.m in Sources */,
+				32967B1220BE31A600FD6D77 /* NSString+DecimalsCalculation.m in Sources */,
 				32967AE120BBD30800FD6D77 /* UIColor+Extension.m in Sources */,
 				32967AE420BBD30800FD6D77 /* UIViewController+BackButtonHandler.m in Sources */,
 				32967A4020BB9F0700FD6D77 /* AppDelegate.m in Sources */,

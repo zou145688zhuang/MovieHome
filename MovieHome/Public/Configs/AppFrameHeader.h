@@ -10,5 +10,6 @@
 #define AppFrameHeader_h
 
 #define kMainHeaderHeight Get375Width(200)
-
+#define kMainTopToolHeight 64
+#define DISTANCE (kMainHeaderHeight - kMainTopToolHeight)
 #endif /* AppFrameHeader_h */

@@ -195,4 +195,5 @@
 //时间的转换
 + (NSString *)stringWithTimelineDate:(NSString *)datestr;
 -(NSString *)fireStruppercaseStringWithStr;
+- (NSString *)trim;
 @end

@@ -10,10 +10,13 @@
 #import "MHsegmentScrollView.h"
 #import "MHContentViewController.h"
 #import <SDCycleScrollView.h>
+#import "AppDelegate.h"
+#import "MHMainTopToolView.h"
 #define CATEGORY  @[@"推荐",@"原创",@"热门",@"美食",@"生活",@"设计感",@"家居",@"礼物",@"阅读",@"运动健身",@"旅行户外"]
 @interface MHMainViewController ()<UIScrollViewDelegate,MHsegmentScrollViewDelegate,SDCycleScrollViewDelegate>
-@property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
-@property (nonatomic, strong) MHsegmentScrollView *segmentScrollView;
+@property (nonatomic, strong) MHMainTopToolView *topToolView;
+@property (nonatomic, strong) SDCycleScrollView *cycleScrollView;//轮播
+@property (nonatomic, strong) MHsegmentScrollView *segmentScrollView;//切换
 @property (nonatomic, strong) UIScrollView *currentUIScrollView;
 //
 @property (nonatomic, strong) UIScrollView *bottomScrollView;
@@ -25,6 +28,7 @@
 @property(nonatomic,strong)NSMutableArray *scrollViews;
 //vc
 @property (nonatomic, strong) MHContentViewController *contentVC;
+
 @end
 
 @implementation MHMainViewController
@@ -39,7 +43,9 @@
     _controlleres = [NSMutableArray array];
     _scrollViews = [NSMutableArray array];
     [self.view addSubview:self.bottomScrollView];
+    
     [self.view addSubview:self.cycleScrollView];
+    [self.view addSubview:self.topToolView];
     [self.view addSubview:self.segmentScrollView];
     self.segmentScrollView.tagArray = CATEGORY;
     [self.bottomScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -72,16 +78,17 @@
     CGFloat scrollffsetY = scrollView.contentOffset.y;
     
     self.lastCollectionViewOffsetY = scrollffsetY;
-    if ( scrollffsetY>0 && scrollffsetY<= kMainHeaderHeight) {
+    if ( scrollffsetY>0 && scrollffsetY<= DISTANCE) {
         self.segmentScrollView.frame = CGRectMake(0, kMainHeaderHeight-scrollffsetY, kScreenWidth, Get375Width(40));
         self.cycleScrollView.frame = CGRectMake(0, -scrollffsetY, kScreenWidth, kMainHeaderHeight);
     }else if( scrollffsetY < 0){
         self.segmentScrollView.frame = CGRectMake(0, kMainHeaderHeight, kScreenWidth, Get375Width(40));
         self.cycleScrollView.frame = CGRectMake(0, 0, kScreenWidth, kMainHeaderHeight);
-    }else if (scrollffsetY > kMainHeaderHeight){
-        self.segmentScrollView.frame = CGRectMake(0, 0, kScreenWidth, Get375Width(40));
+    }else if (scrollffsetY > DISTANCE){
+        self.segmentScrollView.frame = CGRectMake(0,kMainTopToolHeight, kScreenWidth, Get375Width(40));
         self.cycleScrollView.frame = CGRectMake(0, -kMainHeaderHeight, kScreenWidth, kMainHeaderHeight);
     }
+    [self.topToolView scrollOffsetY:scrollffsetY];
 }
 #pragma mark -UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -104,6 +111,17 @@
             }
         }
 }
+
+#pragma mark -- SDCycleScrollViewDelegate
+#pragma mark -- 图片点击回调
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
+    
+}
+#pragma mark -- 点击图片回调
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    
+}
+#pragma mark -- UI
 - (UIScrollView *)bottomScrollView{
     if (!_bottomScrollView) {
         _bottomScrollView = [UIScrollView new];
@@ -122,22 +140,19 @@
             }];
             [_contentVC.contentScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
         }
-         self.currentUIScrollView = self.scrollViews[0];
+        self.currentUIScrollView = self.scrollViews[0];
         _bottomScrollView.contentSize = CGSizeMake(KscreenWidth*CATEGORY.count, 0);
-       
+        
     }
     return _bottomScrollView;
 }
-#pragma mark -- SDCycleScrollViewDelegate
-#pragma mark -- 图片点击回调
-- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index{
-    
+#pragma mark -- topToolView
+- (MHMainTopToolView *)topToolView{
+    if (!_topToolView) {
+        _topToolView = [[MHMainTopToolView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth, kMainTopToolHeight)];
+    }
+    return _topToolView;
 }
-#pragma mark -- 点击图片回调
-- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-    
-}
-#pragma mark -- UI
 #pragma mark -- cycleScrollView
 - (SDCycleScrollView *)cycleScrollView{
     if (!_cycleScrollView) {
@@ -156,6 +171,9 @@
         _segmentScrollView.delegate = self;
     }
     return _segmentScrollView;
+}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

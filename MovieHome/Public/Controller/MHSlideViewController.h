@@ -10,7 +10,7 @@
 
 
 #define kLeftPageWidth 118
-#define kLeftAvailableWidth 118
+
 #define kMainPageDistance   (kScreenWidth- kLeftPageWidth)   //打开左侧窗时，中视图(右视图)露出的宽度
 #define kMainPageScale   1  //打开左侧窗时，中视图(右视图）缩放比例
 #define kMainPageCenter  CGPointMake(kScreenWidth + kScreenWidth * kMainPageScale / 2.0 - kMainPageDistance, kScreenHeight / 2)  //打开左侧窗时，中视图中心点

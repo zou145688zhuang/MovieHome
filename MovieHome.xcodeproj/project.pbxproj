@@ -40,6 +40,8 @@
 		32967B0E20BC18E000FD6D77 /* MHContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B0D20BC18E000FD6D77 /* MHContentViewController.m */; };
 		32967B1220BE31A600FD6D77 /* NSString+DecimalsCalculation.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B1120BE31A600FD6D77 /* NSString+DecimalsCalculation.m */; };
 		32967B1520BE33BB00FD6D77 /* MHMainTopToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B1420BE33BB00FD6D77 /* MHMainTopToolView.m */; };
+		32967B4220BFD40200FD6D77 /* MHHotTagsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B4120BFD40200FD6D77 /* MHHotTagsView.m */; };
+		32967B4520BFDB9D00FD6D77 /* MHSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32967B4420BFDB9D00FD6D77 /* MHSearchViewController.m */; };
 		A0AB3F67FD7C86BD28C9A411 /* libPods-MovieHome.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DD492CC3DF4026EFFD67A33 /* libPods-MovieHome.a */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +135,10 @@
 		32967B1120BE31A600FD6D77 /* NSString+DecimalsCalculation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+DecimalsCalculation.m"; sourceTree = "<group>"; };
 		32967B1320BE33BB00FD6D77 /* MHMainTopToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHMainTopToolView.h; sourceTree = "<group>"; };
 		32967B1420BE33BB00FD6D77 /* MHMainTopToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHMainTopToolView.m; sourceTree = "<group>"; };
+		32967B4020BFD40200FD6D77 /* MHHotTagsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHHotTagsView.h; sourceTree = "<group>"; };
+		32967B4120BFD40200FD6D77 /* MHHotTagsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHHotTagsView.m; sourceTree = "<group>"; };
+		32967B4320BFDB9D00FD6D77 /* MHSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MHSearchViewController.h; sourceTree = "<group>"; };
+		32967B4420BFDB9D00FD6D77 /* MHSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MHSearchViewController.m; sourceTree = "<group>"; };
 		4A8029350E09CBEFD31AC461 /* Pods-MovieHome.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieHome.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieHome/Pods-MovieHome.release.xcconfig"; sourceTree = "<group>"; };
 		4DD492CC3DF4026EFFD67A33 /* libPods-MovieHome.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MovieHome.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -448,6 +454,7 @@
 		32967B0720BBEF8000FD6D77 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				32967B3D20BFCF8300FD6D77 /* Search */,
 				32967B0C20BC18E000FD6D77 /* MHContentViewController.h */,
 				32967B0D20BC18E000FD6D77 /* MHContentViewController.m */,
 				32967B0420BBE9B800FD6D77 /* MHMainViewController.h */,
@@ -465,6 +472,33 @@
 				32967B1420BE33BB00FD6D77 /* MHMainTopToolView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		32967B3D20BFCF8300FD6D77 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				32967B3F20BFCFA900FD6D77 /* Controller */,
+				32967B3E20BFCF9C00FD6D77 /* View */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		32967B3E20BFCF9C00FD6D77 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				32967B4020BFD40200FD6D77 /* MHHotTagsView.h */,
+				32967B4120BFD40200FD6D77 /* MHHotTagsView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		32967B3F20BFCFA900FD6D77 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				32967B4320BFDB9D00FD6D77 /* MHSearchViewController.h */,
+				32967B4420BFDB9D00FD6D77 /* MHSearchViewController.m */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E13198D1F9A0ECD4EA36CDFA /* Frameworks */ = {
@@ -675,12 +709,14 @@
 				32967ADF20BBD30800FD6D77 /* NSString+Extension.m in Sources */,
 				32967B1520BE33BB00FD6D77 /* MHMainTopToolView.m in Sources */,
 				32967AF720BBDE8B00FD6D77 /* MHNavigationViewController.m in Sources */,
+				32967B4220BFD40200FD6D77 /* MHHotTagsView.m in Sources */,
 				32967A4E20BB9F0800FD6D77 /* main.m in Sources */,
 				32967AE320BBD30800FD6D77 /* UIView+Utils.m in Sources */,
 				32967B1220BE31A600FD6D77 /* NSString+DecimalsCalculation.m in Sources */,
 				32967AE120BBD30800FD6D77 /* UIColor+Extension.m in Sources */,
 				32967AE420BBD30800FD6D77 /* UIViewController+BackButtonHandler.m in Sources */,
 				32967A4020BB9F0700FD6D77 /* AppDelegate.m in Sources */,
+				32967B4520BFDB9D00FD6D77 /* MHSearchViewController.m in Sources */,
 				32967B0B20BBEFDB00FD6D77 /* MHsegmentScrollView.m in Sources */,
 				32967AE520BBD30800FD6D77 /* UIViewController+Utils.m in Sources */,
 				32967AFA20BBE1BB00FD6D77 /* MHTabBarViewController.m in Sources */,

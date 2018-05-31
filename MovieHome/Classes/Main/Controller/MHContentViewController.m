@@ -23,7 +23,7 @@
     }];
 }
 - (void)initUI{
-    self.view.backgroundColor = LRRandomColor;
+    
     [self.view addSubview:self.tableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

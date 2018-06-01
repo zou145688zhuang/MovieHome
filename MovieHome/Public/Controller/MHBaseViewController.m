@@ -18,6 +18,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = RGBA(250, 250, 250, 1);
     // Do any additional setup after loading the view.
+    if (@available(iOS 11.0, *)) {
+        self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
 }
 
 

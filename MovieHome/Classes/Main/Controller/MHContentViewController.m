@@ -7,7 +7,9 @@
 //
 
 #import "MHContentViewController.h"
-
+#import "MHMainFoldCell.h"
+#import "MHMovieDto.h"
+#define MHMainFoldCellid @"MHMainFoldCellid"
 @interface MHContentViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) NSMutableArray *modelArray;
 @end
@@ -21,6 +23,13 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(self.view);
     }];
+    
+    for (NSInteger i = 0; i < 20; i++) {
+        MHMovieDto *dto = [[MHMovieDto alloc]init];
+        [self.modelArray addObject:dto];
+        
+    }
+    [self.tableView reloadData];
 }
 - (void)initUI{
     
@@ -28,19 +37,39 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 100;
-    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth, kMainHeaderHeight)];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+    self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth, kMainHeaderHeight+kMainSegmentH)];
+    [self.tableView registerClass:[MHMainFoldCell class] forCellReuseIdentifier:NSStringFromClass([MHMainFoldCell class])];
     _contentScrollView = self.tableView;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 50;
+    return self.modelArray.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    MHMovieDto *dto = [self.modelArray safeObjectAtIndex:indexPath.row];
+     
+    if (dto.isOpen) {
+        return kMainCellBaseContentH+kMainCellToolH+kMainContainerH+Get375Width(15);
+    }else{
+        return kMainCellBaseContentH+kMainCellToolH+Get375Width(15);
+        
+    }
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
-    
+    MHMainFoldCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([MHMainFoldCell class])];
+    MHMovieDto *dto = [self.modelArray safeObjectAtIndex:indexPath.row];
+    [cell setContentMovie:dto];
     return cell;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  MHMovieDto *dto = [self.modelArray safeObjectAtIndex:indexPath.row];
+    if (dto.isOpen) {
+        dto.isOpen = NO;
+    }else{
+        dto.isOpen = YES;
+    }
+    //[self.modelArray replaceObjectAtIndex:indexPath.row withObject:dto];
+    [self.tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationFade];
 }
 - (NSMutableArray *)modelArray {
     if (!_modelArray) {

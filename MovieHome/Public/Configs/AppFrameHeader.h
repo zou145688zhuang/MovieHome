@@ -8,8 +8,13 @@
 
 #ifndef AppFrameHeader_h
 #define AppFrameHeader_h
-
+//main
 #define kMainHeaderHeight Get375Width(200)
 #define kMainTopToolHeight 64
+#define kMainSegmentH Get375Width(40)
 #define DISTANCE (kMainHeaderHeight - kMainTopToolHeight)
+//main cell
+#define kMainCellBaseContentH Get375Width(160)
+#define kMainContainerH Get375Width(60)
+#define kMainCellToolH Get375Width(40)
 #endif /* AppFrameHeader_h */

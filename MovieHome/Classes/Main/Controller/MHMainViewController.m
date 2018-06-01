@@ -12,6 +12,7 @@
 #import <SDCycleScrollView.h>
 #import "AppDelegate.h"
 #import "MHMainTopToolView.h"
+
 #define CATEGORY  @[@"推荐",@"原创",@"热门",@"美食",@"生活",@"设计感",@"家居",@"礼物",@"阅读",@"运动健身",@"旅行户外"]
 @interface MHMainViewController ()<UIScrollViewDelegate,MHsegmentScrollViewDelegate,SDCycleScrollViewDelegate>
 @property (nonatomic, strong) MHMainTopToolView *topToolView;
@@ -64,7 +65,7 @@
     [self clickSegmentIndex:ondex];
 }
 - (void)clickSegmentIndex:(NSInteger)index{
-   
+    self.bottomScrollView.contentOffset = CGPointMake(kScreenWidth*index, 0);
       [self resetScrollOffset];
 }
 #pragma observe 监听collection滚动
@@ -79,13 +80,13 @@
     
     self.lastCollectionViewOffsetY = scrollffsetY;
     if ( scrollffsetY>0 && scrollffsetY<= DISTANCE) {
-        self.segmentScrollView.frame = CGRectMake(0, kMainHeaderHeight-scrollffsetY, kScreenWidth, Get375Width(40));
+        self.segmentScrollView.frame = CGRectMake(0, kMainHeaderHeight-scrollffsetY, kScreenWidth, kMainSegmentH);
         self.cycleScrollView.frame = CGRectMake(0, -scrollffsetY, kScreenWidth, kMainHeaderHeight);
     }else if( scrollffsetY < 0){
-        self.segmentScrollView.frame = CGRectMake(0, kMainHeaderHeight, kScreenWidth, Get375Width(40));
+        self.segmentScrollView.frame = CGRectMake(0, kMainHeaderHeight, kScreenWidth, kMainSegmentH);
         self.cycleScrollView.frame = CGRectMake(0, 0, kScreenWidth, kMainHeaderHeight);
     }else if (scrollffsetY > DISTANCE){
-        self.segmentScrollView.frame = CGRectMake(0,kMainTopToolHeight, kScreenWidth, Get375Width(40));
+        self.segmentScrollView.frame = CGRectMake(0,kMainTopToolHeight, kScreenWidth, kMainSegmentH);
         self.cycleScrollView.frame = CGRectMake(0, -kMainHeaderHeight, kScreenWidth, kMainHeaderHeight);
     }
     [self.topToolView scrollOffsetY:scrollffsetY];
@@ -167,7 +168,7 @@
 #pragma mark segmentScroll
 - (MHsegmentScrollView *)segmentScrollView{
     if (!_segmentScrollView) {
-        _segmentScrollView = [[MHsegmentScrollView alloc]initWithFrame:CGRectMake(0, kMainHeaderHeight, KscreenWidth, Get375Width(40))];
+        _segmentScrollView = [[MHsegmentScrollView alloc]initWithFrame:CGRectMake(0, kMainHeaderHeight, KscreenWidth, kMainSegmentH)];
         _segmentScrollView.delegate = self;
     }
     return _segmentScrollView;

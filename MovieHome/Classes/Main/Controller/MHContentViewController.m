@@ -7,7 +7,7 @@
 //
 
 #import "MHContentViewController.h"
-#import "MHMainFoldCell.h"
+#import "MHContentFollCell.h"
 #import "MHMovieDto.h"
 #define MHMainFoldCellid @"MHMainFoldCellid"
 @interface MHContentViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -37,8 +37,11 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 100;
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KscreenWidth, kMainHeaderHeight+kMainSegmentH)];
-    [self.tableView registerClass:[MHMainFoldCell class] forCellReuseIdentifier:NSStringFromClass([MHMainFoldCell class])];
+   [self.tableView registerClass:[MHContentFollCell class] forCellReuseIdentifier:MHMainFoldCellid];
     _contentScrollView = self.tableView;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -56,7 +59,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MHMainFoldCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([MHMainFoldCell class])];
+    MHContentFollCell *cell = [tableView dequeueReusableCellWithIdentifier:MHMainFoldCellid];
     MHMovieDto *dto = [self.modelArray safeObjectAtIndex:indexPath.row];
     [cell setContentMovie:dto];
     return cell;
